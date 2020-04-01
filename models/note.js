@@ -1,7 +1,7 @@
 const Joi = require('joi');
 const mongoose = require('mongoose');
 
-const noteScheme = new mongoose.Schema({
+const noteSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true,
@@ -22,7 +22,9 @@ function validateNote(note) {
     const schema = {
         title: Joi.string().min(2).required(),
         body: Joi.string().min(1).required()
-    }
+    };
+
+    return Joi.validate(note, schema);
 }
 exports.noteSchema = noteSchema;
 exports.Note = Note;
