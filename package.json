@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/samers11/Notes#readme",
   "dependencies": {
+    "bcrypt": "^4.0.1",
     "config": "^1.29.4",
     "express": "^4.17.1",
     "joi": "^13.1.0",
