@@ -16,7 +16,7 @@ router.post('/', async (req, res) =>{
     user = new User(_.pick(req.body, ['name', 'email', 'password']));
     await user.save();
 
-    res.send(user);
+    res.send(_.pick(user, ['_id', 'name', 'email']));
 });
 
 module.exports = router;
