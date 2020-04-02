@@ -1,4 +1,5 @@
-const {Note, validate} = require('../models/note')
+const auth = require('../middleware/auth');
+const {Note, validate} = require('../models/note');
 const express = require('express');
 const mongoose = require('mongoose');
 const router = express.Router();
@@ -8,7 +9,7 @@ router.get('/', async (req, res) => {
     res.send(notes);
 });
 
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
     const { error } = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
   
