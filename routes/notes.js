@@ -1,4 +1,5 @@
 const auth = require('../middleware/auth');
+const admin = require('../middleware/admin');
 const {Note, validate} = require('../models/note');
 const express = require('express');
 const mongoose = require('mongoose');
@@ -19,6 +20,13 @@ router.post('/', auth, async (req, res) => {
     });
     await note.save();
     
+    res.send(note);
+  });
+  
+  router.delete('/:id', [auth, admin], async (req, res) => {
+    const note = await Note.findByIdAndRemove(req.params.id);
+
+    if(!note) return res.status(404).send("Note not found");
     res.send(note);
   });
 
