@@ -5,8 +5,10 @@ const express = require('express');
 const mongoose = require('mongoose');
 const router = express.Router();
 
-router.get('/', async (req, res) => {
-    const notes = await Note.find();
+router.get('/', auth, async (req, res) => {
+    const notes = await Note.find({
+        user: req.user._id
+    });
     res.send(notes);
 });
 
@@ -14,9 +16,10 @@ router.post('/', auth, async (req, res) => {
     const { error } = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
   
-    note = new Note({ 
+    note = new Note({
+        user: req.user._id,
         title: req.body.title,
-        body: req.body.body 
+        body: req.body.body
     });
     await note.save();
     
