@@ -22,7 +22,6 @@ router.post('/', auth, async (req, res) => {
         body: req.body.body
     });
     await note.save();
-    
     res.send(note);
   });
   

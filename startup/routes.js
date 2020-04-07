@@ -1,3 +1,4 @@
+const error = require('../middleware/error');
 const express = require('express');
 const users = require('../routes/users');
 const authentication = require('../routes/authentication');
@@ -9,4 +10,5 @@ module.exports = function(app) {
     app.use('/api/notes', notes);
     app.use('/api/users', users);
     app.use('/api/authentication', authentication)
+    app.use(error);
 }
